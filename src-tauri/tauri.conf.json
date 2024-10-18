@@ -1,0 +1,74 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "Hoot",
+  "version": "0.1.0",
+  "identifier": "com.hoot.app",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:3000",
+    "beforeDevCommand": "bun nuxt:dev",
+    "beforeBuildCommand": "bun generate"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Hoot",
+       "width": 1100,
+        "height": 650,
+        "resizable": true,
+        "fullscreen": false,
+        "center": true,
+        "minHeight": 600,
+        "minWidth": 800,
+        "transparent": true,
+        "shadow": true,
+        "windowEffects": {
+          "effects": [
+            "acrylic"
+          ]
+        }
+      }
+    ],
+    "security": {
+      "csp": {
+        "default-src": "'self' blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-inline' asset: https://asset.localhost",
+        "script-src": "'self' 'unsafe-eval'",
+        "connect-src": "'self' ipc: http://ipc.localhost tauri: asset: https://asset.localhost",
+        "img-src": "'self' asset: http://asset.localhost blob: data:",
+        "style-src": "'unsafe-inline' 'self'"
+      },
+      "assetProtocol": {
+        "enable": true,
+        "scope": [
+          "$APPDATA/**",
+          "$APPDATA/images/**",
+          "$LOCALAPPDATA/**",
+          "$LOCALAPPDATA/images/**",
+          "$HOME/.local/share/com.hoot.app/**"
+        ]
+      }
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEZDNzFGOTAwOTYzMTAzMgpSV1F5RUdNSmtCL0hEL05HanZ0aWdhMlhaWkdmWmhrVDdWbC83QnlwanJZeVJna25oQXM5ZVRWNQo=",
+      "endpoints": [
+        "https://github.com/cuervolu/hoot/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}
